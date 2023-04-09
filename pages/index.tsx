@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
 
 export default function Home(): JSX.Element {
-  const a = 1;
+  const a = 1
 
   return (
     <div className={styles.container}>
@@ -73,5 +73,5 @@ export default function Home(): JSX.Element {
         </a>
       </footer>
     </div>
-  );
+  )
 }
