@@ -1,2 +1,2 @@
 /// <reference types="next" />
-/// <reference types="./global.d.ts" />
+/// <reference types="./image-types.d.ts" />
