@@ -1,4 +1,4 @@
-import { Button, Htag } from '../components'
+import { Button, Htag } from 'components'
 
 export default function Home() {
   return (
