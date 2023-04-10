@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
 import { Htag, Rating } from 'components'
+import { withLayout } from 'layout/Layout'
 
-export default function Home() {
+function Home() {
   const [rating, setRating] = useState(3)
 
   return (
@@ -16,3 +17,5 @@ export default function Home() {
     </>
   )
 }
+
+export default withLayout(Home)

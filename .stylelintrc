@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-standard-scss", "stylelint-order-config-standard", "stylelint-config-prettier"],
   "plugins": ["stylelint-order"],
   "rules": {
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }
