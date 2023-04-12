@@ -19,7 +19,7 @@
   background-color: var(--primary);
 
   svg {
-    fill: var(--white);
+    fill: currentcolor;
   }
 
   &:hover {
@@ -31,17 +31,13 @@
   color: var(--black);
   border: 1px solid var(--gray-light);
 
-  svg {
-    fill: var(--black);
-  }
-
   &:hover {
     color: var(--white);
     border-color: var(--white);
     background-color: var(--primary);
 
     svg {
-      fill: var(--white);
+      fill: currentcolor;
     }
   }
 }

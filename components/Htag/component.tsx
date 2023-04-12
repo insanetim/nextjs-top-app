@@ -1,5 +1,5 @@
-import { HtagProps } from './Htag.props'
-import styles from './Htag.module.scss'
+import { HtagProps } from './types'
+import styles from './styles.module.scss'
 
 export const Htag = ({ tag, children, ...props }: HtagProps) => {
   switch (tag) {

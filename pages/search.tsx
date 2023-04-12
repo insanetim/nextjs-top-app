@@ -1,27 +1,14 @@
-import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import axios from 'axios'
 
-import { Htag, Rating } from 'components'
 import { MenuItem } from 'interfaces/menu.interface'
 import withLayout from 'layout'
 
-const Home = () => {
-  const [rating, setRating] = useState(3)
-
-  return (
-    <>
-      <Htag tag='h1'>Heading</Htag>
-      <Rating
-        rating={rating}
-        isEditable
-        setRating={setRating}
-      />
-    </>
-  )
+const Search = () => {
+  return <>Search</>
 }
 
-export default withLayout(Home)
+export default withLayout(Search)
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const firstCategory = 0

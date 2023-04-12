@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
-import { TagProps } from './Tag.props'
-import styles from './Tag.module.scss'
+import { TagProps } from './types'
+import styles from './styles.module.scss'
 
 export const Tag = ({ size = 'sm', color = 'ghost', className, href, children, ...props }: TagProps) => {
   return (

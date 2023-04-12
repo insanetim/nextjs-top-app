@@ -7,7 +7,7 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+  "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
@@ -25,7 +25,7 @@
     "import/resolver": {
       "node": {
         "paths": ["./"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".ts", ".tsx"]
       },
       "typescript": {
         "alwaysTryTypes": true
@@ -34,6 +34,7 @@
   },
   "rules": {
     "semi": "off",
+    "no-underscore-dangle": "off",
     "@typescript-eslint/semi": ["off"],
     "@typescript-eslint/no-empty-interface": [
       "error",

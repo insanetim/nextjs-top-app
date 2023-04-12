@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 
-import { ButtonProps } from './Button.props'
+import { ButtonProps } from './types'
 import ArrowIcon from './arrow.svg'
-import styles from './Button.module.scss'
+import styles from './styles.module.scss'
 
 export const Button = ({ appearance, arrow = 'none', children, className, ...props }: ButtonProps) => {
   return (

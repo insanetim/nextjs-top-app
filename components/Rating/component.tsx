@@ -1,9 +1,9 @@
 import { KeyboardEvent, useEffect, useState } from 'react'
 import classNames from 'classnames'
 
-import { RatingProps } from './Rating.props'
+import { RatingProps } from './types'
 import StarIcon from './star.svg'
-import styles from './Rating.module.scss'
+import styles from './styles.module.scss'
 
 export function Rating({ isEditable = false, rating, setRating, ...props }: RatingProps) {
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(null))

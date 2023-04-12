@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import { format } from 'date-fns'
 
-import { FooterProps } from './Footer.props'
-import styles from './Footer.module.scss'
+import { FooterProps } from './types'
+import styles from './styles.module.scss'
 
-export const Footer = ({ className, ...props }: FooterProps) => {
+const Footer = ({ className, ...props }: FooterProps) => {
   return (
     <footer
       className={classNames(className, styles.footer)}
@@ -28,3 +28,5 @@ export const Footer = ({ className, ...props }: FooterProps) => {
     </footer>
   )
 }
+
+export default Footer
