@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { GetStaticProps } from 'next'
 import axios from 'axios'
 
-import { Htag, Rating } from 'components'
 import { MenuItem } from 'interfaces/menu.interface'
+import { Htag, Rating } from 'components'
 import withLayout from 'layout'
 
 const Home = () => {
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   }
 }
 
-interface HomeProps extends Record<string, unknown> {
+interface HomeProps {
   menu: MenuItem[]
   firstCategory: number
 }

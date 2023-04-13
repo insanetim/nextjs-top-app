@@ -3,7 +3,9 @@ import classNames from 'classnames'
 import { SidebarProps } from './types'
 import Menu from 'layout/Menu'
 import Logo from '../logo.svg'
-import styles from './Sidebar.module.scss'
+import styles from './styles.module.scss'
+import { Search } from 'components'
+import Link from 'next/link'
 
 const Sidebar = ({ className, ...props }: SidebarProps) => {
   return (
@@ -11,8 +13,12 @@ const Sidebar = ({ className, ...props }: SidebarProps) => {
       className={classNames(className, styles.sidebar)}
       {...props}
     >
-      <Logo className={styles.logo} />
-      <div>search</div>
+      <Link href='/'>
+        <a>
+          <Logo />
+        </a>
+      </Link>
+      <Search />
       <Menu />
     </div>
   )

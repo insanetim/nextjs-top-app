@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({ params }: GetS
   }
 }
 
-interface TypeProps extends Record<string, unknown> {
+interface TypeProps {
   menu: MenuItem[]
   firstCategory: TopLevelCategory
 }

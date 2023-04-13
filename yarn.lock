@@ -3209,6 +3209,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+sort-by-typescript@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/sort-by-typescript/-/sort-by-typescript-1.2.3.tgz#6ecf1721ea5acc98d7b33693f3de7c8e4c587830"
+  integrity sha512-sRiFNVpe+3dQncwWFvk6NmvKRbhdP62IK2UGZFAeT907NJHWe/x9ZTzCPiLf1kFOQJzUsRGGEay4gffuck8JUA==
+
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.1, source-map-js@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"

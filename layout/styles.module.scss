@@ -6,7 +6,7 @@
     'header'
     'body'
     'footer';
-  grid-gap: 0 30px;
+  grid-gap: 40px 30px;
 
   min-height: 100vh;
 
@@ -28,16 +28,22 @@
 }
 
 .sidebar {
-  display: none;
+  display: none !important;
   grid-area: sidebar;
 
   @media (min-width: 765px) {
-    display: block;
+    display: grid !important;
   }
 }
 
 .body {
   grid-area: body;
+
+  padding: 0 15px;
+
+  @media (min-width: 765px) {
+    padding: 0;
+  }
 }
 
 .footer {

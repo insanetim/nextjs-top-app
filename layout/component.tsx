@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { ComponentType } from 'react'
 
 import { LayoutProps } from './types'
 import AppContextProvider, { IAppContext } from 'context/app.context'
@@ -18,15 +18,15 @@ const Layout = ({ children }: LayoutProps) => {
   )
 }
 
-const withLayout = <T extends Record<string, unknown> & IAppContext>(Component: FunctionComponent<T>) => {
-  return (props: T) => {
+const withLayout = <P extends object>(Component: ComponentType<P>) => {
+  return (props: P & IAppContext) => {
     return (
       <AppContextProvider
         menu={props.menu}
         firstCategory={props.firstCategory}
       >
         <Layout>
-          <Component {...props} />
+          <Component {...(props as P)} />
         </Layout>
       </AppContextProvider>
     )

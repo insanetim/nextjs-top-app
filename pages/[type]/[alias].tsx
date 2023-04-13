@@ -78,7 +78,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
   }
 }
 
-interface TopPageProps extends Record<string, unknown> {
+interface TopPageProps {
   menu: MenuItem[]
   firstCategory: TopLevelCategory
   page: TopPageModel
