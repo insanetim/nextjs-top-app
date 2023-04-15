@@ -1,10 +1,24 @@
+import { useContext, useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import axios from 'axios'
 
+import { AppContext } from 'context/app.context'
 import { MenuItem } from 'interfaces/menu.interface'
 import { firstLevelMenu } from 'helpers/helpers'
 import { TypeProps } from './types'
+
+const useContainer = (menu: MenuItem[]) => {
+  const { setMenu } = useContext(AppContext)
+
+  useEffect(() => {
+    setMenu && setMenu(menu)
+  }, [menu, setMenu])
+
+  return
+}
+
+export default useContainer
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

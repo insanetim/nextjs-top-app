@@ -1,31 +1,11 @@
-import { useState } from 'react'
-import { sortBy } from 'sort-by-typescript'
-
-import { ProductModel } from 'interfaces/product.interface'
-import { TopPageProps } from './types'
-import { SortEnum } from 'components/Sort/types'
 import { Advantages, HhData, Htag, Product, Sort, Tag } from 'components'
 import withLayout from 'layout'
+import { TopPageProps } from './types'
+import useContainer from './hook'
 import styles from './styles.module.scss'
 
 const TopPage = ({ page, products }: TopPageProps) => {
-  const [sort, setSort] = useState(SortEnum.Rating)
-
-  const updatedProdcuts = products.map(p => {
-    p.rating = Math.round(p.reviewAvg ?? p.initialRating)
-    return p
-  })
-
-  let sortedProducts = [] as ProductModel[]
-  if (sort === SortEnum.Rating) {
-    sortedProducts = updatedProdcuts.sort(sortBy('-rating', 'price'))
-  } else if (sort === SortEnum.Price) {
-    sortedProducts = updatedProdcuts.sort(sortBy('price', '-rating'))
-  }
-
-  const setSortHandler = (sort: SortEnum) => {
-    setSort(sort)
-  }
+  const { sort, sortedProducts, setSortHandler } = useContainer(products)
 
   return (
     <div>

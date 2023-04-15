@@ -13,6 +13,7 @@ export const AppContext = createContext<IAppContext>({ menu: [], firstCategory: 
 
 const AppContextProvider = ({ menu, firstCategory, children }: PropsWithChildren<IAppContext>) => {
   const [menuState, setMenuState] = useState<MenuItem[]>(menu)
+
   const setMenu = useCallback((newMenu: MenuItem[]) => {
     setMenuState(newMenu)
   }, [])
