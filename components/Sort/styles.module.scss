@@ -8,8 +8,10 @@
     white-space: nowrap;
   }
 
-  @media (min-width: 765px) {
+  @media (min-width: 993px) {
     justify-items: end;
+
+    margin-left: 20px;
   }
 }
 

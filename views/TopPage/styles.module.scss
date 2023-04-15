@@ -8,7 +8,7 @@
 
   align-items: baseline;
 
-  @media (min-width: 765px) {
+  @media (min-width: 993px) {
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
       't . s'
@@ -24,9 +24,9 @@
 
   align-items: baseline;
 
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
-  @media (min-width: 765px) {
+  @media (min-width: 993px) {
     margin-bottom: 0;
   }
 }

@@ -1,15 +1,18 @@
 import { ProductProps } from './types'
 import { Button, Card, Divider, Rating, Tag } from 'components'
-import { priceRu } from 'helpers/helpers'
+import { declOfNum, priceRu } from 'helpers/helpers'
 import styles from './styles.module.scss'
+import Image from 'next/image'
 
 export const Product = ({ product }: ProductProps) => {
   return (
     <Card className={styles.product}>
       <div className={styles.logo}>
-        <img
+        <Image
           src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
           alt={product.title}
+          width={70}
+          height={70}
         />
       </div>
       <div className={styles.title}>{product.title}</div>
@@ -47,12 +50,25 @@ export const Product = ({ product }: ProductProps) => {
       </div>
       <div className={styles.priceTitle}>цена</div>
       <div className={styles.creditTitle}>{product.credit > 0 && 'в кредит'}</div>
-      <div className={styles.rateTitle}>{product.reviewCount} отзывов</div>
+      <div className={styles.rateTitle}>
+        {product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
+      </div>
       <div className={styles.hr}>
         <Divider />
       </div>
       <div className={styles.description}>{product.description}</div>
-      <div className={styles.feature}>features</div>
+      <div className={styles.features}>
+        {product.characteristics.map(c => (
+          <div
+            key={c.name}
+            className={styles.characteristic}
+          >
+            <span className={styles.characteristicName}>{c.name}</span>
+            <span className={styles.characteristicDots}></span>
+            <span className={styles.characteristicValue}>{c.value}</span>
+          </div>
+        ))}
+      </div>
       <div className={styles.advBlock}>
         {product.advantages && (
           <div className={styles.advantages}>
@@ -67,7 +83,7 @@ export const Product = ({ product }: ProductProps) => {
           </div>
         )}
       </div>
-      <div className={styles.hr}>
+      <div className={styles.hr2}>
         <Divider />
       </div>
       <div className={styles.actions}>
