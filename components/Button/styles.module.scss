@@ -30,11 +30,12 @@
 .ghost {
   color: var(--black);
   border: 1px solid var(--gray-light);
+  background: var(--white);
 
   &:hover {
     color: var(--white);
     border-color: var(--white);
-    background-color: var(--primary);
+    background: var(--primary);
 
     svg {
       fill: currentcolor;
@@ -47,7 +48,7 @@
 
   margin-left: 10px;
 
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
 
   svg {
     transition: fill 0.2s ease;

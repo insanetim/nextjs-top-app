@@ -4,6 +4,10 @@
   margin-right: 5px;
 }
 
+.star:last-child svg {
+  margin-right: 0;
+}
+
 .filled svg {
   fill: var(--primary);
 }

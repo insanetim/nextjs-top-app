@@ -3,11 +3,13 @@
   grid-template-columns: auto auto;
   gap: 40px;
 
-  justify-items: end;
-
   span {
     cursor: pointer;
     white-space: nowrap;
+  }
+
+  @media (min-width: 765px) {
+    justify-items: end;
   }
 }
 

@@ -1,10 +1,44 @@
-.title {
+.titleWrap {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    't'
+    's'
+    'p';
 
   align-items: baseline;
-  justify-items: start;
+
+  @media (min-width: 765px) {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      't . s'
+      'p p p';
+  }
+}
+
+.title {
+  grid-area: t;
+
+  display: flex;
   gap: 20px;
+
+  align-items: baseline;
+
+  margin-bottom: 20px;
+
+  @media (min-width: 765px) {
+    margin-bottom: 0;
+  }
+}
+
+.sort {
+  grid-area: s;
+}
+
+.products {
+  grid-area: p;
+
+  margin-top: 20px;
 }
 
 .hhTitle {

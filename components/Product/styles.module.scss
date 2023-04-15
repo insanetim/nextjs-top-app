@@ -1,0 +1,153 @@
+.product {
+  display: grid;
+  grid-template-columns: [start] 70px [logoend] 30px [titlestart] calc(50% - 100px) [middle] 1fr [pricestart] auto [priceend] 40px [creditstart] auto [creditend] 40px [ratestart] auto [end];
+
+  padding: 40px;
+
+  & + & {
+    margin-top: 30px;
+  }
+}
+
+.logo {
+  grid-column: start / logoend;
+  grid-row: 1 / span 2;
+}
+
+.title,
+.tags {
+  grid-column: titlestart / middle;
+}
+
+.price,
+.priceTitle {
+  grid-column: pricestart / priceend;
+}
+
+.credit,
+.creditTitle {
+  grid-column: creditstart / creditend;
+}
+
+.rating,
+.rateTitle {
+  grid-column: ratestart / end;
+}
+
+.hr,
+.description,
+.actions {
+  grid-column: start / end;
+}
+
+.feature {
+  grid-column: start / middle;
+}
+
+.advBlock {
+  grid-column: middle / end;
+}
+
+.logo {
+  overflow: hidden;
+  align-self: center;
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 5px;
+
+  img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.title {
+  align-self: flex-end;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.tags {
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+
+  margin-top: 8px;
+  gap: 5px;
+}
+
+.price,
+.credit {
+  align-self: flex-end;
+
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.month {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.rating {
+  align-self: flex-end;
+}
+
+.priceTitle,
+.creditTitle,
+.rateTitle {
+  align-self: flex-start;
+
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+}
+
+.description {
+  margin-bottom: 15px;
+
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.advBlock {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.advantages {
+  padding-left: 15px;
+
+  border-left: 3px solid var(--green);
+}
+
+.disadvantages {
+  margin-top: 20px;
+  padding-left: 15px;
+
+  border-left: 3px solid var(--red);
+}
+
+.advTitle {
+  margin-bottom: 5px;
+
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}

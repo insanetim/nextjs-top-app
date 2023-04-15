@@ -4,6 +4,7 @@
   "rules": {
     "no-descending-specificity": null,
     "declaration-block-no-redundant-longhand-properties": null,
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "no-duplicate-selectors": null
   }
 }
