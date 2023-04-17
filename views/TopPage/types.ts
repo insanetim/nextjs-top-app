@@ -8,3 +8,7 @@ export interface TopPageProps {
   page: TopPageModel
   products: ProductModel[]
 }
+
+export interface TopPageHookProps {
+  products: ProductModel[]
+}

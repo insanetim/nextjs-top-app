@@ -6,9 +6,10 @@ import axios from 'axios'
 import { AppContext } from 'context/app.context'
 import { MenuItem } from 'interfaces/menu.interface'
 import { firstLevelMenu } from 'helpers/helpers'
-import { TypeProps } from './types'
+import { API } from 'helpers/api'
+import { TypeHookProps, TypeProps } from './types'
 
-const useContainer = (menu: MenuItem[]) => {
+const useContainer = ({ menu }: TypeHookProps) => {
   const { setMenu } = useContext(AppContext)
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({ params }: GetS
     return { notFound: true }
   }
 
-  const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+  const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
     firstCategory: firstCategoryItem.id
   })
 

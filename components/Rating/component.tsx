@@ -1,61 +1,25 @@
-import { KeyboardEvent, useEffect, useState } from 'react'
+import { ForwardedRef, forwardRef } from 'react'
 import classNames from 'classnames'
 
 import { RatingProps } from './types'
-import StarIcon from './star.svg'
+import useContainer from './hook'
 import styles from './styles.module.scss'
 
-export function Rating({ isEditable = false, rating, setRating, ...props }: RatingProps) {
-  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(null))
+export const Rating = forwardRef(
+  ({ isEditable = false, rating, setRating, error, ...props }: RatingProps, ref: ForwardedRef<HTMLDivElement>) => {
+    const { ratingArray } = useContainer({ rating, isEditable, setRating })
 
-  useEffect(() => {
-    constructRating(rating)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rating])
-
-  const constructRating = (currentRating: number) => {
-    const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {
-      return (
-        <span
-          key={i}
-          className={classNames(styles.star, {
-            [styles.filled]: i < currentRating,
-            [styles.editable]: isEditable
-          })}
-          onMouseEnter={() => changeDisplayHandler(i + 1)}
-          onMouseLeave={() => changeDisplayHandler(rating)}
-          onClick={() => clickHandler(i + 1)}
-        >
-          <StarIcon
-            onKeyDown={(e: KeyboardEvent<SVGAElement>) => isEditable && keyDownHandler(i + 1, e)}
-            tabIndex={isEditable ? 0 : -1}
-          />
-        </span>
-      )
-    })
-    setRatingArray(updatedArray)
+    return (
+      <div
+        ref={ref}
+        className={classNames(styles.ratingWrapper, {
+          [styles.error]: error
+        })}
+        {...props}
+      >
+        {ratingArray}
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
+      </div>
+    )
   }
-
-  const changeDisplayHandler = (i: number) => {
-    if (!isEditable) {
-      return
-    }
-    constructRating(i)
-  }
-
-  const clickHandler = (i: number) => {
-    if (!isEditable || !setRating) {
-      return
-    }
-    setRating(i)
-  }
-
-  const keyDownHandler = (i: number, e: KeyboardEvent<SVGAElement>) => {
-    if (e.code !== 'Space' || !setRating) {
-      return
-    }
-    setRating(i)
-  }
-
-  return <div {...props}>{ratingArray}</div>
-}
+)

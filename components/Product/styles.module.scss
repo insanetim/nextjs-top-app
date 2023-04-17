@@ -1,12 +1,12 @@
+.productWrapper:not(:first-child) {
+  margin-top: 50px;
+}
+
 .product {
   display: grid;
   grid-template-columns: [start] 70px [logoend] 30px [titlestart] calc(50% - 100px) [middle] 1fr [pricestart] auto [priceend] 40px [creditstart] auto [creditend] 40px [ratestart] auto [end];
 
   padding: 40px;
-
-  &:not(&:last-child) {
-    margin-bottom: 30px;
-  }
 }
 
 .logo {
@@ -183,6 +183,24 @@
   line-height: 22px;
 }
 
+.reviews {
+  margin-top: -7px;
+}
+
+.opened {
+  overflow: hidden;
+
+  max-height: auto;
+  padding: 30px;
+}
+
+.closed {
+  overflow: hidden;
+
+  max-height: 0;
+  padding: 0 !important;
+}
+
 @media (max-width: 1320px) {
   .product {
     grid-template-columns: 70px 30px auto 40px auto 40px 1fr;
@@ -288,6 +306,10 @@
   .price,
   .credit {
     margin-bottom: 10px;
+  }
+
+  .reviews {
+    padding: 20px;
   }
 }
 

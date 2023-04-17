@@ -5,3 +5,7 @@ export interface TypeProps {
   menu: MenuItem[]
   firstCategory: TopLevelCategory
 }
+
+export interface TypeHookProps {
+  menu: MenuItem[]
+}

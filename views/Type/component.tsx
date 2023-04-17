@@ -3,7 +3,7 @@ import { TypeProps } from './types'
 import useContainer from './hook'
 
 const Type = ({ menu, firstCategory }: TypeProps) => {
-  useContainer(menu)
+  useContainer({ menu })
 
   return <h1>Type {firstCategory} Page</h1>
 }

@@ -5,7 +5,7 @@ import useContainer from './hook'
 import styles from './styles.module.scss'
 
 const TopPage = ({ page, products }: TopPageProps) => {
-  const { sort, sortedProducts, setSortHandler } = useContainer(products)
+  const { sort, sortedProducts, setSortHandler } = useContainer({ products })
 
   return (
     <div>
