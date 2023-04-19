@@ -9,20 +9,12 @@ export const Button = ({ appearance, arrow = 'none', children, className, ...pro
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
-      className={classNames(styles.button, className, {
-        [styles.primary]: appearance === 'primary',
-        [styles.ghost]: appearance === 'ghost'
-      })}
+      className={classNames(styles.button, styles[appearance], className)}
       {...props}
     >
       {children}
       {arrow !== 'none' && (
-        <span
-          className={classNames(styles.arrow, {
-            [styles.down]: arrow === 'down',
-            [styles.right]: arrow === 'right'
-          })}
-        >
+        <span className={classNames(styles.arrow, styles[arrow])}>
           <ArrowIcon />
         </span>
       )}

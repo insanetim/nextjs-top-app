@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
-import axios from 'axios'
 import { sortBy } from 'sort-by-typescript'
 
 import { MenuItem } from 'interfaces/menu.interface'
 import { TopPageModel } from 'interfaces/page.interface'
 import { ProductModel } from 'interfaces/product.interface'
-import { SortEnum } from 'components/Sort/types'
+import httpClient from 'api/httpClient'
 import { firstLevelMenu } from 'helpers/helpers'
+import { SortEnum } from 'components/Sort/types'
 import { API } from 'helpers/api'
 import { TopPageHookProps, TopPageProps } from './types'
 
@@ -20,7 +20,8 @@ const useContainer = ({ products }: TopPageHookProps) => {
     return p
   })
 
-  let sortedProducts = [] as ProductModel[]
+  let sortedProducts: ProductModel[] = []
+
   if (sort === SortEnum.Rating) {
     sortedProducts = updatedProdcuts.sort(sortBy('-rating', 'price'))
   } else if (sort === SortEnum.Price) {
@@ -40,15 +41,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = []
 
   for (const m of firstLevelMenu) {
-    const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
-      firstCategory: m.id
-    })
-    paths = paths.concat(menu.flatMap(s => s.pages.map(p => `/${m.route}/${p.alias}`)))
+    try {
+      const { data: menu } = await httpClient.post<MenuItem[]>(API.topPage.find, {
+        firstCategory: m.id
+      })
+      paths = paths.concat(menu.flatMap(s => s.pages.map(p => `/${m.route}/${p.alias}`)))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return {
     paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
 
@@ -66,14 +71,14 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
   }
 
   try {
-    const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
+    const { data: menu } = await httpClient.post<MenuItem[]>(API.topPage.find, {
       firstCategory: firstCategoryItem.id
     })
     if (menu.length === 0) {
       return { notFound: true }
     }
-    const { data: page } = await axios.get<TopPageModel>(API.topPage.byAlias + params.alias)
-    const { data: products } = await axios.post<ProductModel[]>(API.product.find, {
+    const { data: page } = await httpClient.get<TopPageModel>(API.topPage.byAlias + params.alias)
+    const { data: products } = await httpClient.post<ProductModel[]>(API.product.find, {
       category: page.category,
       limit: 10
     })

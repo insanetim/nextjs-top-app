@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { KeyboardEvent, useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
@@ -52,13 +52,20 @@ const useContainer = () => {
       )
   }
 
+  const openSecondLevelKeyboard = (secondCategory: string, e: KeyboardEvent) => {
+    if (e.code === 'Enter' || e.code === 'Space') {
+      e.preventDefault()
+      openSecondLevel(secondCategory)
+    }
+  }
+
   const buildFirstLevel = () => {
     return (
       <>
         {firstLevelMenu.map(m => (
           <div key={m.route}>
             <Link href={`/${m.route}`}>
-              <a>
+              <a className={styles.firstLevelLink}>
                 <div
                   className={classNames(styles.firstLevel, {
                     [styles.firstLevelActive]: m.id === firstCategory
@@ -87,7 +94,9 @@ const useContainer = () => {
             <div key={m._id.secondCategory}>
               <div
                 className={styles.secondLevel}
-                onClick={() => openSecondLevel(m._id.secondCategory)}
+                onClick={openSecondLevel.bind(null, m._id.secondCategory)}
+                onKeyDown={openSecondLevelKeyboard.bind(null, m._id.secondCategory)}
+                tabIndex={0}
               >
                 {m._id.secondCategory}
               </div>
@@ -98,7 +107,7 @@ const useContainer = () => {
                 animate={m.isOpened ? 'visible' : 'hidden'}
                 className={styles.secondLevelBlock}
               >
-                {buildThirdLevel(m.pages, menuItem.route)}
+                {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
               </motion.div>
             </div>
           )
@@ -107,7 +116,7 @@ const useContainer = () => {
     )
   }
 
-  const buildThirdLevel = (pages: PageItem[], route: string) => {
+  const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
     return pages.map(p => (
       <motion.div
         key={p._id}
@@ -119,6 +128,7 @@ const useContainer = () => {
               [styles.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
             })}
             title={p.category}
+            tabIndex={isOpened ? 0 : -1}
           >
             {p.category}
           </a>

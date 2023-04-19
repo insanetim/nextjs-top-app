@@ -26,6 +26,10 @@
   }
 }
 
+.firstLevelLink {
+  outline-offset: -1px;
+}
+
 .firstLevelActive,
 .firstLevel:hover {
   color: var(--primary);
@@ -51,9 +55,11 @@
 
   color: var(--gray-dark);
 
+  outline-offset: -1px;
+
   font-size: 12px;
   font-weight: 300;
-  line-height: 16px;
+  line-height: 18px;
 }
 
 .secondLevelBlock {
@@ -72,6 +78,8 @@
   text-overflow: ellipsis;
 
   color: var(--gray-dark);
+
+  outline-offset: -1px;
 
   font-size: 14px;
   font-weight: 500;

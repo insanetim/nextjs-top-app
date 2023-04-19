@@ -8,10 +8,7 @@ export const ButtonIcon = ({ appearance, icon, className, ...props }: ButtonIcon
 
   return (
     <button
-      className={classNames(styles.button, className, {
-        [styles.primary]: appearance === 'primary',
-        [styles.white]: appearance === 'white'
-      })}
+      className={classNames(styles.button, styles[appearance], className)}
       {...props}
     >
       <IconComponent />

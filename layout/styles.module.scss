@@ -20,6 +20,25 @@
   }
 }
 
+.skipLink {
+  position: fixed;
+  top: 0;
+  left: 100px;
+
+  display: block;
+  overflow: hidden;
+
+  height: 0;
+
+  color: var(--white);
+
+  background: var(--primary);
+}
+
+.displayed {
+  height: auto;
+}
+
 .header {
   grid-area: header;
 
@@ -41,6 +60,8 @@
   grid-area: body;
 
   padding: 0 15px;
+
+  outline: none;
 
   @media (min-width: 765px) {
     padding: 0;

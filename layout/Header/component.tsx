@@ -18,7 +18,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
       {...props}
     >
       <Link href='/'>
-        <a>
+        <a aria-label='MyTop main page'>
           <Logo />
         </a>
       </Link>
@@ -26,6 +26,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
         icon='menu'
         appearance='white'
         onClick={openMenuHandler}
+        aria-label='Click to open menu'
       />
       <motion.div
         className={styles.mobileMenu}
@@ -39,6 +40,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
           icon='close'
           appearance='white'
           onClick={closeMenuHandler}
+          aria-label='Click to close menu'
         />
       </motion.div>
     </header>

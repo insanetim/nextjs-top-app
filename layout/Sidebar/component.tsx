@@ -14,7 +14,7 @@ const Sidebar = ({ className, ...props }: SidebarProps) => {
       {...props}
     >
       <Link href='/'>
-        <a>
+        <a aria-label='MyTop main page'>
           <Logo />
         </a>
       </Link>

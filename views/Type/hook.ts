@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
-import axios from 'axios'
 
-import { AppContext } from 'context/app.context'
 import { MenuItem } from 'interfaces/menu.interface'
+import httpClient from 'api/httpClient'
+import { AppContext } from 'context/app.context'
 import { firstLevelMenu } from 'helpers/helpers'
 import { API } from 'helpers/api'
 import { TypeHookProps, TypeProps } from './types'
@@ -39,9 +39,14 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({ params }: GetS
     return { notFound: true }
   }
 
-  const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
-    firstCategory: firstCategoryItem.id
-  })
+  let menu: MenuItem[] = []
+
+  try {
+    const { data } = await httpClient.post<MenuItem[]>(API.topPage.find, { firstCategory: firstCategoryItem.id })
+    menu = data
+  } catch (error) {
+    console.log(error)
+  }
 
   return {
     props: {

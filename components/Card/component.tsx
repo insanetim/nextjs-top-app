@@ -9,9 +9,7 @@ export const Card = forwardRef(
     return (
       <div
         ref={ref}
-        className={classNames(styles.card, className, {
-          [styles.blue]: color === 'blue'
-        })}
+        className={classNames(styles.card, styles[color], className)}
         {...props}
       >
         {children}

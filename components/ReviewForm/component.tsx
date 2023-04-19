@@ -8,12 +8,12 @@ import useContainer from './hook'
 import styles from './styles.module.scss'
 
 export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) => {
-  const { register, control, handleSubmit, errors, isSuccess, error, onSubmit, setIsSuccess, setError } = useContainer({
+  const { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError } = useContainer({
     productId
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={submitFormHandler}>
       <div
         className={classNames(styles.reviewForm, className)}
         {...props}

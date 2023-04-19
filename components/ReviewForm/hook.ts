@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 
+import httpClient from 'api/httpClient'
 import { API } from 'helpers/api'
 import { IReviewForm, IReviewSentResponse, ReviewHookProps } from './types'
 
@@ -18,7 +19,7 @@ const useContainer = ({ productId }: ReviewHookProps) => {
 
   const onSubmit = async (formData: IReviewForm) => {
     try {
-      const { data } = await axios.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId })
+      const { data } = await httpClient.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId })
       if (data.message) {
         setIsSuccess(true)
         reset()
@@ -30,7 +31,9 @@ const useContainer = ({ productId }: ReviewHookProps) => {
     }
   }
 
-  return { register, control, handleSubmit, errors, isSuccess, error, onSubmit, setIsSuccess, setError }
+  const submitFormHandler = handleSubmit(onSubmit)
+
+  return { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError }
 }
 
 export default useContainer
