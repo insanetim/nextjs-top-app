@@ -33,6 +33,7 @@ const TopPage = ({ page, products }: TopPageProps) => {
                 <Product
                   key={p._id}
                   product={p}
+                  layout
                 />
               ))}
             </div>

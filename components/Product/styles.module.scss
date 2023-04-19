@@ -183,22 +183,14 @@
   line-height: 22px;
 }
 
-.reviews {
+.reviewsWrapper {
+  overflow: hidden;
+
   margin-top: -7px;
 }
 
-.opened {
-  overflow: hidden;
-
-  max-height: auto;
+.reviews {
   padding: 30px;
-}
-
-.closed {
-  overflow: hidden;
-
-  max-height: 0;
-  padding: 0 !important;
 }
 
 @media (max-width: 1320px) {

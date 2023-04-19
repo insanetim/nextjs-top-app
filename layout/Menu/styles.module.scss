@@ -1,3 +1,9 @@
+.menu {
+  overflow: hidden;
+
+  width: 100%;
+}
+
 .firstLevel {
   display: grid;
 
@@ -51,24 +57,19 @@
 }
 
 .secondLevelBlock {
-  display: none;
-}
-
-.secondLevelBlockOpened {
-  display: block;
-
-  :last-child {
-    margin-bottom: 20px;
-  }
+  overflow: hidden;
 }
 
 .thirdLevel {
   display: block;
+  overflow: hidden;
 
   margin-bottom: 10px;
 
   cursor: pointer;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   color: var(--gray-dark);
 
