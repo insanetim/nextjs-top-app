@@ -1,33 +1,48 @@
 import classNames from 'classnames'
 
-import { SortEnum, SortProps } from './types'
 import SortIcon from './sort.svg'
+import { SortEnum, SortProps } from './types'
+import useContainer from './hook'
 import styles from './styles.module.scss'
 
 export const Sort = ({ sort, setSort, className, ...props }: SortProps) => {
+  const { clickHandler } = useContainer({ setSort })
+
   return (
     <div
       className={classNames(styles.sort, className)}
       {...props}
     >
-      <span
+      <div
+        id='sort'
+        className={styles.sortName}
+      >
+        Сортировка
+      </div>
+      <button
+        id='rating'
         className={classNames({
           [styles.active]: sort === SortEnum.Rating
         })}
-        onClick={() => setSort(SortEnum.Rating)}
+        onClick={clickHandler.bind(null, SortEnum.Rating)}
+        aria-selected={sort === SortEnum.Rating}
+        aria-labelledby='sort rating'
       >
         <SortIcon className={styles.sortIcon} />
         По рейтингу
-      </span>
-      <span
+      </button>
+      <button
+        id='price'
         className={classNames({
           [styles.active]: sort === SortEnum.Price
         })}
-        onClick={() => setSort(SortEnum.Price)}
+        onClick={clickHandler.bind(null, SortEnum.Price)}
+        aria-selected={sort === SortEnum.Price}
+        aria-labelledby='sort price'
       >
         <SortIcon className={styles.sortIcon} />
         По цене
-      </span>
+      </button>
     </div>
   )
 }

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useReducedMotion } from 'framer-motion'
 
 const useContainer = () => {
   const [isOpened, setIsOpened] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
   const router = useRouter()
 
   const variants = {
@@ -14,7 +16,7 @@ const useContainer = () => {
       }
     },
     closed: {
-      opacity: 0,
+      opacity: prefersReducedMotion ? 1 : 0,
       x: '100%'
     }
   }

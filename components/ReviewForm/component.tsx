@@ -7,10 +7,11 @@ import { ReviewFormProps } from './types'
 import useContainer from './hook'
 import styles from './styles.module.scss'
 
-export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) => {
-  const { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError } = useContainer({
-    productId
-  })
+export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProps) => {
+  const { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError, clearErrors } =
+    useContainer({
+      productId
+    })
 
   return (
     <form onSubmit={submitFormHandler}>
@@ -27,6 +28,8 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
           })}
           placeholder='Имя'
           error={errors.name}
+          tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.name ? true : false}
         />
         <Input
           {...register('title', {
@@ -37,6 +40,8 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
           })}
           placeholder='Заголовок отзыва'
           error={errors.title}
+          tabIndex={isOpened ? 0 : -1}
+          aria-invalid={errors.title ? true : false}
         />
         <div className={styles.rating}>
           <span>Оценка:</span>
@@ -56,6 +61,7 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
                 setRating={field.onChange}
                 isEditable
                 error={errors.rating}
+                tabIndex={isOpened ? 0 : -1}
               />
             )}
           />
@@ -71,11 +77,15 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
           placeholder='Текст отзыва'
           rows={3}
           error={errors.description}
+          tabIndex={isOpened ? 0 : -1}
+          aria-label='Текст отзыва'
+          aria-invalid={errors.description ? true : false}
         />
         <div className={styles.submit}>
           <Button
             appearance='primary'
-            type='submit'
+            onClick={() => clearErrors()}
+            tabIndex={isOpened ? 0 : -1}
           >
             Отправить
           </Button>
@@ -83,22 +93,34 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
         </div>
       </div>
       {isSuccess && (
-        <div className={classNames(styles.panel, styles.success)}>
+        <div
+          className={classNames(styles.panel, styles.success)}
+          role='alert'
+        >
           <div className={styles.successTitle}>Ваш отзыв отправлен</div>
           <div>Спасибо, ваш отзыв будет опубликован после проверки.</div>
-          <CloseIcon
+          <button
             className={styles.close}
             onClick={() => setIsSuccess(false)}
-          />
+            aria-label='Закрыть оповещение'
+          >
+            <CloseIcon />
+          </button>
         </div>
       )}
       {error && (
-        <div className={classNames(styles.panel, styles.error)}>
+        <div
+          className={classNames(styles.panel, styles.error)}
+          role='alert'
+        >
           Что-то пошло не так, попробуйте обновить страницу.
-          <CloseIcon
+          <button
             className={styles.close}
             onClick={() => setError('')}
-          />
+            aria-label='Закрыть оповещение'
+          >
+            <CloseIcon />
+          </button>
         </div>
       )}
     </form>

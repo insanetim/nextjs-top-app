@@ -1,5 +1,4 @@
-import { ComponentType, KeyboardEvent, useRef, useState } from 'react'
-import classNames from 'classnames'
+import { ComponentType, KeyboardEvent, useRef } from 'react'
 
 import AppContextProvider, { IAppContext } from 'context/app.context'
 import useScrollY from 'hooks/useScrollY'
@@ -11,7 +10,6 @@ import { LayoutProps } from './types'
 import styles from './styles.module.scss'
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isSkipLinkDisplayed, setIsSkipLinkDisplayed] = useState(false)
   const bodyRef = useRef<HTMLDivElement>(null)
   const scrollY = useScrollY()
 
@@ -20,31 +18,27 @@ const Layout = ({ children }: LayoutProps) => {
       e.preventDefault()
       bodyRef.current?.focus()
     }
-    setIsSkipLinkDisplayed(false)
   }
 
   return (
     <div className={styles.wrapper}>
       <a
-        className={classNames(styles.skipLink, {
-          [styles.displayed]: isSkipLinkDisplayed
-        })}
-        onFocus={() => setIsSkipLinkDisplayed(true)}
-        onBlur={() => setIsSkipLinkDisplayed(false)}
+        href='#start-of-content'
+        className={styles.skipLink}
         onKeyDown={skipContentAction}
-        tabIndex={1}
       >
-        Сразу к содержанию
+        Перейти к содержанию
       </a>
       <Header className={styles.header} />
       <Sidebar className={styles.sidebar} />
-      <div
+      <main
         ref={bodyRef}
         className={styles.body}
         tabIndex={0}
+        role='main'
       >
         {children}
-      </div>
+      </main>
       <Footer className={styles.footer} />
       {scrollY > 200 && <Up />}
     </div>

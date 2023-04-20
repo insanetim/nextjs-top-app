@@ -1,8 +1,8 @@
-import { KeyboardEvent, useContext } from 'react'
+import { KeyboardEvent, useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 import { FirstLevelMenuItem, PageItem } from 'interfaces/menu.interface'
 import { AppContext } from 'context/app.context'
@@ -11,15 +11,19 @@ import styles from './styles.module.scss'
 
 const useContainer = () => {
   const { menu, setMenu, firstCategory } = useContext(AppContext)
+  const [announce, setAnnounce] = useState<'closed' | 'opened' | undefined>()
+  const prefersReducedMotion = useReducedMotion()
   const router = useRouter()
 
   const variants = {
     visible: {
       marginBottom: 20,
-      transition: {
-        duration: 0.1,
-        staggerChildren: 0.05
-      }
+      transition: prefersReducedMotion
+        ? {}
+        : {
+            duration: 0.1,
+            staggerChildren: 0.05
+          }
     },
     hidden: {
       marginBottom: 0
@@ -35,7 +39,7 @@ const useContainer = () => {
       }
     },
     hidden: {
-      opacity: 0,
+      opacity: prefersReducedMotion ? 1 : 0,
       height: 0
     }
   }
@@ -45,6 +49,7 @@ const useContainer = () => {
       setMenu(
         menu.map(m => {
           if (m._id.secondCategory === secondCategory) {
+            setAnnounce(m.isOpened ? 'closed' : 'opened')
             m.isOpened = !m.isOpened
           }
           return m
@@ -61,9 +66,12 @@ const useContainer = () => {
 
   const buildFirstLevel = () => {
     return (
-      <>
+      <ul className={styles.firstLevelList}>
         {firstLevelMenu.map(m => (
-          <div key={m.route}>
+          <li
+            key={m.route}
+            aria-expanded={m.id === firstCategory}
+          >
             <Link href={`/${m.route}`}>
               <a className={styles.firstLevelLink}>
                 <div
@@ -77,30 +85,30 @@ const useContainer = () => {
               </a>
             </Link>
             {m.id === firstCategory && buildSecondLevel(m)}
-          </div>
+          </li>
         ))}
-      </>
+      </ul>
     )
   }
 
   const buildSecondLevel = (menuItem: FirstLevelMenuItem) => {
     return (
-      <div className={styles.secondBlock}>
+      <ul className={styles.secondBlock}>
         {menu.map(m => {
           if (m.pages.map(p => p.alias).includes(router.asPath.split('/')[2])) {
             m.isOpened = true
           }
           return (
-            <div key={m._id.secondCategory}>
-              <div
+            <li key={m._id.secondCategory}>
+              <button
                 className={styles.secondLevel}
                 onClick={openSecondLevel.bind(null, m._id.secondCategory)}
                 onKeyDown={openSecondLevelKeyboard.bind(null, m._id.secondCategory)}
-                tabIndex={0}
+                aria-expanded={m.isOpened ?? false}
               >
                 {m._id.secondCategory}
-              </div>
-              <motion.div
+              </button>
+              <motion.ul
                 layout
                 variants={variants}
                 initial={m.isOpened ? 'visible' : 'hidden'}
@@ -108,17 +116,17 @@ const useContainer = () => {
                 className={styles.secondLevelBlock}
               >
                 {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
-              </motion.div>
-            </div>
+              </motion.ul>
+            </li>
           )
         })}
-      </div>
+      </ul>
     )
   }
 
   const buildThirdLevel = (pages: PageItem[], route: string, isOpened: boolean) => {
     return pages.map(p => (
-      <motion.div
+      <motion.li
         key={p._id}
         variants={variantsChildren}
       >
@@ -129,15 +137,16 @@ const useContainer = () => {
             })}
             title={p.category}
             tabIndex={isOpened ? 0 : -1}
+            aria-current={`/${route}/${p.alias}` === router.asPath ? 'page' : false}
           >
             {p.category}
           </a>
         </Link>
-      </motion.div>
+      </motion.li>
     ))
   }
 
-  return { buildFirstLevel }
+  return { announce, buildFirstLevel }
 }
 
 export default useContainer

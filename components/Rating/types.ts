@@ -6,10 +6,13 @@ export interface RatingProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivEle
   rating: number
   setRating?: (rating: number) => void
   error?: FieldError
+  tabIndex?: number
 }
 
 export interface RatingHookProps {
   rating: number
   isEditable?: boolean
   setRating?: (rating: number) => void
+  tabIndex?: number
+  error?: FieldError
 }

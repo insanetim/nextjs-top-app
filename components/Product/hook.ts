@@ -29,6 +29,7 @@ const useContainer = () => {
         block: 'start'
       })
     })
+    reviewRef.current?.focus()
   }
 
   return { isReviewOpened, reviewRef, variants, openReviewToggle, scrollToReview }

@@ -12,14 +12,18 @@ const useContainer = ({ productId }: ReviewHookProps) => {
     control,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    clearErrors
   } = useForm<IReviewForm>()
   const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string>('')
 
   const onSubmit = async (formData: IReviewForm) => {
     try {
-      const { data } = await httpClient.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId })
+      const { data } = await httpClient.post<IReviewSentResponse>(API.review.createDemo, {
+        ...formData,
+        productId
+      })
       if (data.message) {
         setIsSuccess(true)
         reset()
@@ -33,7 +37,7 @@ const useContainer = ({ productId }: ReviewHookProps) => {
 
   const submitFormHandler = handleSubmit(onSubmit)
 
-  return { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError }
+  return { register, control, errors, isSuccess, error, submitFormHandler, setIsSuccess, setError, clearErrors }
 }
 
 export default useContainer

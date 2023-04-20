@@ -5,7 +5,7 @@ import useContainer from './hook'
 import styles from './styles.module.scss'
 
 const TopPage = ({ page, products }: TopPageProps) => {
-  const { sort, sortedProducts, setSortHandler } = useContainer({ products })
+  const { sort, sortedProducts, prefersReducedMotion, setSortHandler } = useContainer({ products })
 
   return (
     <div>
@@ -18,6 +18,7 @@ const TopPage = ({ page, products }: TopPageProps) => {
               size='md'
             >
               {sortedProducts.length}
+              <span className='visualyHidden'>элементов</span>
             </Tag>
           )}
         </div>
@@ -28,12 +29,15 @@ const TopPage = ({ page, products }: TopPageProps) => {
               sort={sort}
               setSort={setSortHandler}
             />
-            <div className={styles.products}>
+            <div
+              className={styles.products}
+              role='list'
+            >
               {sortedProducts.map(p => (
                 <Product
                   key={p._id}
                   product={p}
-                  layout
+                  layout={prefersReducedMotion ? false : true}
                 />
               ))}
             </div>

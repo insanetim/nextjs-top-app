@@ -2,12 +2,16 @@
   position: relative;
 }
 
-.star svg {
-  margin-right: 5px;
-}
+.star {
+  display: inline-block;
 
-.star:last-child svg {
-  margin-right: 0;
+  svg {
+    margin-right: 5px;
+  }
+
+  &:last-child svg {
+    margin-right: 0;
+  }
 }
 
 .filled svg {

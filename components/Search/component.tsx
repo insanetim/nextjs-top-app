@@ -10,8 +10,9 @@ export const Search = ({ className, ...props }: SearchProps) => {
   const { search, changeHandler, goToSearch, keyDownHandler } = useContainer()
 
   return (
-    <div
+    <form
       className={classNames(styles.search, className)}
+      role='search'
       {...props}
     >
       <Input
@@ -25,10 +26,10 @@ export const Search = ({ className, ...props }: SearchProps) => {
         className={styles.button}
         appearance='primary'
         onClick={goToSearch}
-        aria-label='Click to search'
+        aria-label='Искать по сайту'
       >
         <GlassIcon />
       </Button>
-    </div>
+    </form>
   )
 }

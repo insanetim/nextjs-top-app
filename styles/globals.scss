@@ -21,6 +21,15 @@ a {
   outline-color: var(--primary);
 }
 
+.visualyHidden {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 0;
+  height: 0;
+}
+
 :root {
   --black: #3b434e;
   --gray-light: #ebebeb;

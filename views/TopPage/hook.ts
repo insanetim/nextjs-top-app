@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
+import { useReducedMotion } from 'framer-motion'
 import { sortBy } from 'sort-by-typescript'
 
 import { MenuItem } from 'interfaces/menu.interface'
@@ -14,6 +15,7 @@ import { TopPageHookProps, TopPageProps } from './types'
 
 const useContainer = ({ products }: TopPageHookProps) => {
   const [sort, setSort] = useState(SortEnum.Rating)
+  const prefersReducedMotion = useReducedMotion()
 
   const updatedProdcuts = products.map(p => {
     p.rating = Math.round(p.reviewAvg ?? p.initialRating)
@@ -32,7 +34,7 @@ const useContainer = ({ products }: TopPageHookProps) => {
     setSort(sort)
   }
 
-  return { sort, sortedProducts, setSortHandler }
+  return { sort, sortedProducts, prefersReducedMotion, setSortHandler }
 }
 
 export default useContainer

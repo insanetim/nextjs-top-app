@@ -3,9 +3,16 @@
   grid-template-columns: auto auto;
   gap: 40px;
 
-  span {
+  button {
     cursor: pointer;
     white-space: nowrap;
+
+    border: none;
+    background: none;
+
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   @media (min-width: 993px) {
@@ -29,4 +36,8 @@
 
     margin-right: 8px;
   }
+}
+
+.sortName {
+  display: none;
 }

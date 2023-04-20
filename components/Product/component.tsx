@@ -18,6 +18,7 @@ export const Product = motion(
         ref={ref}
         className={classNames(styles.productWrapper, className)}
         {...props}
+        role='listitem'
       >
         <Card className={styles.product}>
           <div className={styles.logo}>
@@ -30,25 +31,31 @@ export const Product = motion(
           </div>
           <div className={styles.title}>{product.title}</div>
           <div className={styles.price}>
-            {priceRu(product.price)}
+            <span>
+              <span className='visualyHidden'>цена</span>
+              {priceRu(product.price)}
+            </span>
             {product.oldPrice && (
               <Tag
                 color='green'
                 size='sm'
               >
+                <span className='visualyHidden'>скидка</span>
                 {priceRu(product.price - product.oldPrice)}
               </Tag>
             )}
           </div>
           <div className={styles.credit}>
             {product.credit > 0 && (
-              <>
+              <span>
+                <span className='visualyHidden'>в кредит</span>
                 {priceRu(product.credit)}
                 <span className={styles.month}>/мес</span>
-              </>
+              </span>
             )}
           </div>
           <div className={styles.rating}>
+            <span className='visualyHidden'>{`рейтинг ${product.rating ?? product.initialRating}`}</span>
             <Rating rating={product.rating ?? product.initialRating} />
           </div>
           <div className={styles.tags}>
@@ -61,8 +68,18 @@ export const Product = motion(
               </Tag>
             ))}
           </div>
-          <div className={styles.priceTitle}>цена</div>
-          <div className={styles.creditTitle}>{product.credit > 0 && 'в кредит'}</div>
+          <div
+            className={styles.priceTitle}
+            aria-hidden='true'
+          >
+            цена
+          </div>
+          <div
+            className={styles.creditTitle}
+            aria-hidden='true'
+          >
+            {product.credit > 0 && 'в кредит'}
+          </div>
           <div className={styles.rateTitle}>
             <a
               href='#ref'
@@ -111,6 +128,7 @@ export const Product = motion(
               appearance='ghost'
               arrow={isReviewOpened ? 'down' : 'right'}
               onClick={openReviewToggle}
+              aria-expanded={isReviewOpened}
             >
               Читать отзывы
             </Button>
@@ -126,6 +144,7 @@ export const Product = motion(
             ref={reviewRef}
             className={styles.reviews}
             color='blue'
+            tabIndex={isReviewOpened ? 0 : -1}
           >
             {product.reviews.map(r => (
               <div key={r._id}>
@@ -133,7 +152,10 @@ export const Product = motion(
                 <Divider />
               </div>
             ))}
-            <ReviewForm productId={product._id} />
+            <ReviewForm
+              productId={product._id}
+              isOpened={isReviewOpened}
+            />
           </Card>
         </motion.div>
       </div>

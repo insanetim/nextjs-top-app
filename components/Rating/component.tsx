@@ -6,8 +6,11 @@ import useContainer from './hook'
 import styles from './styles.module.scss'
 
 export const Rating = forwardRef(
-  ({ isEditable = false, rating, setRating, error, ...props }: RatingProps, ref: ForwardedRef<HTMLDivElement>) => {
-    const { ratingArray } = useContainer({ rating, isEditable, setRating })
+  (
+    { isEditable = false, rating, setRating, error, tabIndex, ...props }: RatingProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    const { ratingArray } = useContainer({ rating, error, isEditable, setRating, tabIndex })
 
     return (
       <div
@@ -18,7 +21,14 @@ export const Rating = forwardRef(
         {...props}
       >
         {ratingArray}
-        {error && <span className={styles.errorMessage}>{error.message}</span>}
+        {error && (
+          <span
+            className={styles.errorMessage}
+            role='alert'
+          >
+            {error.message}
+          </span>
+        )}
       </div>
     )
   }
