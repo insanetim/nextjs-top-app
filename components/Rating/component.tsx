@@ -10,7 +10,7 @@ export const Rating = forwardRef(
     { isEditable = false, rating, setRating, error, tabIndex, ...props }: RatingProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const { ratingArray } = useContainer({ rating, error, isEditable, setRating, tabIndex })
+    const { ratingArray } = useContainer({ rating, isEditable, setRating, tabIndex })
 
     return (
       <div
@@ -18,6 +18,9 @@ export const Rating = forwardRef(
         className={classNames(styles.ratingWrapper, {
           [styles.error]: error
         })}
+        role='radiogroup'
+        aria-label={isEditable ? 'Укажите рейтинг' : `рейтинг ${rating}`}
+        aria-invalid={error ? true : false}
         {...props}
       >
         {ratingArray}

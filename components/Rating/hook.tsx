@@ -5,7 +5,7 @@ import StarIcon from './star.svg'
 import { RatingHookProps } from './types'
 import styles from './styles.module.scss'
 
-const useContainer = ({ rating, error, isEditable, setRating, tabIndex }: RatingHookProps) => {
+const useContainer = ({ rating, isEditable, setRating, tabIndex }: RatingHookProps) => {
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(null))
   const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([])
 
@@ -71,14 +71,16 @@ const useContainer = ({ rating, error, isEditable, setRating, tabIndex }: Rating
           onClick={() => clickHandler(i + 1)}
           onKeyDown={keyDownHandler}
           tabIndex={computeFocus(rating, i)}
-          role={isEditable ? 'slider' : ''}
-          aria-valuenow={rating}
-          aria-valuemax={5}
-          aria-valuemin={1}
-          aria-label={isEditable ? 'Укажите рейтинг' : `рейтинг ${rating}`}
-          aria-invalid={error ? true : false}
+          role='radio'
+          aria-checked={i < currentRating}
+          aria-posinset={i + 1}
+          aria-setsize={5}
         >
-          <StarIcon />
+          <StarIcon
+            role='img'
+            focusable='false'
+            aria-label='star'
+          />
         </span>
       )
     })

@@ -14,5 +14,4 @@ export interface RatingHookProps {
   isEditable?: boolean
   setRating?: (rating: number) => void
   tabIndex?: number
-  error?: FieldError
 }

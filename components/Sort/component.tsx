@@ -12,33 +12,28 @@ export const Sort = ({ sort, setSort, className, ...props }: SortProps) => {
     <div
       className={classNames(styles.sort, className)}
       {...props}
+      role='radiogroup'
     >
-      <div
-        id='sort'
-        className={styles.sortName}
-      >
-        Сортировка
-      </div>
       <button
-        id='rating'
         className={classNames({
           [styles.active]: sort === SortEnum.Rating
         })}
         onClick={clickHandler.bind(null, SortEnum.Rating)}
-        aria-selected={sort === SortEnum.Rating}
-        aria-labelledby='sort rating'
+        role='radio'
+        aria-checked={sort === SortEnum.Rating}
+        aria-label='Сортировать по рейтингу'
       >
         <SortIcon className={styles.sortIcon} />
         По рейтингу
       </button>
       <button
-        id='price'
         className={classNames({
           [styles.active]: sort === SortEnum.Price
         })}
         onClick={clickHandler.bind(null, SortEnum.Price)}
-        aria-selected={sort === SortEnum.Price}
-        aria-labelledby='sort price'
+        role='radio'
+        aria-checked={sort === SortEnum.Price}
+        aria-label='Сортировать по цене'
       >
         <SortIcon className={styles.sortIcon} />
         По цене
