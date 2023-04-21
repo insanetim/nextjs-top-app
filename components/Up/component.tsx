@@ -16,6 +16,7 @@ export const Up = () => {
         icon='up'
         appearance='primary'
         onClick={scrollToTop}
+        aria-label='Наверх'
       />
     </motion.div>
   )

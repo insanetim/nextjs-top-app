@@ -91,7 +91,8 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
         firstCategory: firstCategoryItem.id,
         page,
         products
-      }
+      },
+      revalidate: 100
     }
   } catch {
     return { notFound: true }
