@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: nextjs-top-app
+    image: ghcr.io/insanetim/nextjs-top-app/nextjs-top-app:develop
     container_name: nextjs-top-app
     restart: always
     ports:
