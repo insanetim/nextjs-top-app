@@ -1,10 +1,9 @@
-FROM node:14-alpine
-WORKDIR /opt/app
-ADD package.json package.json
-RUN npm install
-ADD . .
+FROM node:16-alpine
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --production --ignore-scripts --prefer-offline
+COPY . .
 ENV NODE_ENV production
-RUN npm run build
-RUN npm prune --production
-CMD ["npm", "start"]
+RUN yarn build
+CMD ["yarn", "start"]
 EXPOSE 3000
