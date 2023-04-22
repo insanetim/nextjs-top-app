@@ -17,10 +17,11 @@ const Header = ({ className, ...props }: HeaderProps) => {
       className={classNames(styles.header, className)}
       {...props}
     >
-      <Link href='/'>
-        <a aria-label='MyTop main page'>
-          <Logo />
-        </a>
+      <Link
+        href='/'
+        aria-label='Go to main page'
+      >
+        <Logo />
       </Link>
       <ButtonIcon
         icon='menu'

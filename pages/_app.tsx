@@ -1,7 +1,14 @@
 import Head from 'next/head'
 import { AppProps } from 'next/dist/shared/lib/router/router'
+import { Noto_Sans } from 'next/font/google'
 
 import 'styles/globals.scss'
+
+const notoSans = Noto_Sans({
+  weight: ['300', '400', '500', '600', '700'],
+  style: 'normal',
+  subsets: ['latin', 'cyrillic']
+})
 
 function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
   return (
@@ -21,6 +28,14 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
           content='ru_RU'
         />
       </Head>
+      <style
+        jsx
+        global
+      >{`
+        html {
+          font-family: ${notoSans.style.fontFamily};
+        }
+      `}</style>
       <Component {...pageProps} />
     </>
   )

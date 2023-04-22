@@ -72,17 +72,18 @@ const useContainer = () => {
             key={m.route}
             aria-expanded={m.id === firstCategory}
           >
-            <Link href={`/${m.route}`}>
-              <a className={styles.firstLevelLink}>
-                <div
-                  className={classNames(styles.firstLevel, {
-                    [styles.firstLevelActive]: m.id === firstCategory
-                  })}
-                >
-                  {m.icon}
-                  <span>{m.name}</span>
-                </div>
-              </a>
+            <Link
+              href={`/${m.route}`}
+              className={styles.firstLevelLink}
+            >
+              <div
+                className={classNames(styles.firstLevel, {
+                  [styles.firstLevelActive]: m.id === firstCategory
+                })}
+              >
+                {m.icon}
+                <span>{m.name}</span>
+              </div>
             </Link>
             {m.id === firstCategory && buildSecondLevel(m)}
           </li>
@@ -130,17 +131,16 @@ const useContainer = () => {
         key={p._id}
         variants={variantsChildren}
       >
-        <Link href={`/${route}/${p.alias}`}>
-          <a
-            className={classNames(styles.thirdLevel, {
-              [styles.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
-            })}
-            title={p.category}
-            tabIndex={isOpened ? 0 : -1}
-            aria-current={`/${route}/${p.alias}` === router.asPath ? 'page' : false}
-          >
-            {p.category}
-          </a>
+        <Link
+          href={`/${route}/${p.alias}`}
+          className={classNames(styles.thirdLevel, {
+            [styles.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath
+          })}
+          title={p.category}
+          tabIndex={isOpened ? 0 : -1}
+          aria-current={`/${route}/${p.alias}` === router.asPath ? 'page' : false}
+        >
+          {p.category}
         </Link>
       </motion.li>
     ))

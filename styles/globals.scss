@@ -5,14 +5,18 @@ body {
 
   color: var(--black);
   background: #f5f6f8;
-
-  font-family: var(--font-family);
 }
 
 a {
   text-decoration: none;
 
   color: inherit;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
 }
 
 * {
@@ -42,5 +46,4 @@ a {
   --red-light: #fea291;
   --green: #007b48;
   --green-light: #c8f8e4;
-  --font-family: 'Noto Sans', sans-serif;
 }

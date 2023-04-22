@@ -13,10 +13,11 @@ const Sidebar = ({ className, ...props }: SidebarProps) => {
       className={classNames(className, styles.sidebar)}
       {...props}
     >
-      <Link href='/'>
-        <a aria-label='MyTop main page'>
-          <Logo />
-        </a>
+      <Link
+        href='/'
+        aria-label='Go to main page'
+      >
+        <Logo />
       </Link>
       <Search />
       <Menu />

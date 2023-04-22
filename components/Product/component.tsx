@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef } from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 
